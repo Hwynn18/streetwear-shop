@@ -1,0 +1,133 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "slug": "tops",
+      "name": "상의"
+    },
+    {
+      "id": 2,
+      "slug": "bottoms",
+      "name": "하의"
+    },
+    {
+      "id": 3,
+      "slug": "hats",
+      "name": "모자"
+    },
+    {
+      "id": 4,
+      "slug": "outer",
+      "name": "겉옷"
+    },
+    {
+      "id": 5,
+      "slug": "socks",
+      "name": "양말"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password_hash": "$2a$10$GWj0tqyAt8dfc5v8vQcLpeRveKe8No1tV8//.yDL3hkkKZmsnXorK",
+      "name": "관리자",
+      "phone": "010-0000-0000",
+      "email": "admin@example.com",
+      "role": "admin",
+      "created_at": "2026-07-10T23:00:52.532Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "name": "오버사이즈 그래픽 롱슬리브",
+      "price": 39000,
+      "image_url": "https://picsum.photos/seed/tee1/600/800",
+      "description": "헤비 코튼 소재의 오버사이즈 롱슬리브 티셔츠.",
+      "stock": 25,
+      "is_active": 1,
+      "created_at": "2026-07-10T23:00:52.402Z",
+      "updated_at": "2026-07-10T23:00:52.402Z"
+    },
+    {
+      "id": 2,
+      "category_id": 2,
+      "name": "와이드 카고 반바지",
+      "price": 45000,
+      "image_url": "https://picsum.photos/seed/shorts1/600/800",
+      "description": "넉넉한 핏의 카키 카고 반바지.",
+      "stock": 18,
+      "is_active": 1,
+      "created_at": "2026-07-10T23:00:52.402Z",
+      "updated_at": "2026-07-10T23:00:52.402Z"
+    },
+    {
+      "id": 3,
+      "category_id": 4,
+      "name": "윈드브레이커 후드 자켓",
+      "price": 68000,
+      "image_url": "https://picsum.photos/seed/jacket1/600/800",
+      "description": "가벼운 발수 소재의 후드 윈드브레이커.",
+      "stock": 12,
+      "is_active": 1,
+      "created_at": "2026-07-10T23:00:52.402Z",
+      "updated_at": "2026-07-10T23:00:52.402Z"
+    },
+    {
+      "id": 4,
+      "category_id": 3,
+      "name": "로우캡 볼캡",
+      "price": 22000,
+      "image_url": "https://picsum.photos/seed/cap1/600/800",
+      "description": "차분한 톤의 데일리 볼캡.",
+      "stock": 40,
+      "is_active": 1,
+      "created_at": "2026-07-10T23:00:52.402Z",
+      "updated_at": "2026-07-10T23:00:52.402Z"
+    },
+    {
+      "id": 5,
+      "category_id": 5,
+      "name": "헤비 크루 삭스 2족 세트",
+      "price": 12000,
+      "image_url": "https://picsum.photos/seed/socks1/600/800",
+      "description": "두툼한 파일 원단의 크루 삭스.",
+      "stock": 60,
+      "is_active": 1,
+      "created_at": "2026-07-10T23:00:52.402Z",
+      "updated_at": "2026-07-10T23:00:52.402Z"
+    }
+  ],
+  "reviews": [],
+  "orders": [],
+  "cartItems": [],
+  "faqs": [
+    {
+      "id": 1,
+      "question": "배송은 얼마나 걸리나요?",
+      "answer": "결제 완료 후 평균 2~3일 이내 출고됩니다.",
+      "sort_order": 1
+    },
+    {
+      "id": 2,
+      "question": "교환/환불은 어떻게 하나요?",
+      "answer": "마이페이지 > 주문내역에서 신청 가능하며, 상품 수령 후 7일 이내 가능합니다.",
+      "sort_order": 2
+    },
+    {
+      "id": 3,
+      "question": "사이즈는 어떻게 확인하나요?",
+      "answer": "각 상품 상세페이지 하단 사이즈 가이드를 참고해주세요.",
+      "sort_order": 3
+    }
+  ],
+  "_seq": {
+    "users": 1,
+    "products": 5,
+    "reviews": 0,
+    "orders": 0,
+    "cartItems": 0
+  }
+}
