@@ -92,7 +92,10 @@ export default function Header() {
           <Link href="/reviews" className="hover:text-stone-900 transition-colors">리뷰</Link>
           <Link href="/faq" className="hover:text-stone-900 transition-colors">FAQ</Link>
           {user?.role === 'admin' && (
-            <Link href="/admin/products" className="hover:text-stone-900 transition-colors">상품관리</Link>
+            <>
+              <Link href="/admin/products" className="hover:text-stone-900 transition-colors">상품관리</Link>
+              <Link href="/admin/faq" className="hover:text-stone-900 transition-colors">FAQ관리</Link>
+            </>
           )}
         </nav>
 

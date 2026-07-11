@@ -33,7 +33,7 @@ export default function HomePage() {
             <h1 className="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
               힘 빼고 입어도 <br className="md:hidden" /> 완성되는 스트릿 무드
             </h1>
-            <p className="mt-5 text-stone-500">모두의 데일리 캐주얼 셀렉션</p>
+            <p className="mt-5 text-stone-500">카키 &amp; 그레이 톤으로 정리한 데일리 캐주얼 셀렉션</p>
             <Link
               href="/clothes/tops"
               className="inline-block mt-8 bg-stone-800 text-white px-8 py-3 rounded-full hover:bg-stone-900 transition-colors"

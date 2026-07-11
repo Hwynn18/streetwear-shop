@@ -16,7 +16,12 @@ export async function middleware(request) {
   const token = request.cookies.get('auth_token')?.value;
   const { pathname } = request.nextUrl;
 
-  const isAdminRoute = pathname.startsWith('/admin') || (pathname.startsWith('/api/products') && request.method !== 'GET');
+  const isReviewReplyRoute = /^\/api\/reviews\/\d+\/reply$/.test(pathname);
+  const isAdminRoute =
+    pathname.startsWith('/admin') ||
+    (pathname.startsWith('/api/products') && request.method !== 'GET') ||
+    (pathname.startsWith('/api/faqs') && request.method !== 'GET') ||
+    isReviewReplyRoute;
   const isMyPageRoute =
     pathname.startsWith('/mypage') ||
     pathname.startsWith('/api/mypage') ||
@@ -49,5 +54,14 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/mypage/:path*', '/cart/:path*', '/api/products/:path*', '/api/mypage/:path*', '/api/cart/:path*'],
+  matcher: [
+    '/admin/:path*',
+    '/mypage/:path*',
+    '/cart/:path*',
+    '/api/products/:path*',
+    '/api/mypage/:path*',
+    '/api/cart/:path*',
+    '/api/faqs/:path*',
+    '/api/reviews/:path*',
+  ],
 };

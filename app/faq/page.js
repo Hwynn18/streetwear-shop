@@ -1,10 +1,11 @@
 import { listFaqs } from '@/lib/store';
 import ScrollReveal from '@/components/ScrollReveal';
 import FaqAccordion from './FaqAccordion';
+import FaqAskForm from './FaqAskForm';
 
 function getFaqs() {
   try {
-    return listFaqs();
+    return listFaqs({ onlyAnswered: true });
   } catch (err) {
     console.error('[FAQ GET ERROR]', err);
     return [];
@@ -21,6 +22,9 @@ export default function FaqPage() {
       </ScrollReveal>
       <ScrollReveal>
         <FaqAccordion faqs={faqs} />
+      </ScrollReveal>
+      <ScrollReveal>
+        <FaqAskForm />
       </ScrollReveal>
     </div>
   );

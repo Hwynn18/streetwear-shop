@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
+import ReviewItem from '@/components/ReviewItem';
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState([]);
@@ -10,18 +11,24 @@ export default function ReviewsPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const loadData = async () => {
     setLoading(true);
     try {
-      const [reviewsRes, productsRes] = await Promise.all([
+      const [reviewsRes, productsRes, meRes] = await Promise.all([
         fetch('/api/reviews'),
         fetch('/api/products'),
+        fetch('/api/auth/me'),
       ]);
       const reviewsData = await reviewsRes.json();
       const productsData = await productsRes.json();
+      const meData = await meRes.json();
       setReviews(reviewsData.reviews || []);
       setProducts(productsData.products || []);
+      setIsAdmin(meData.user?.role === 'admin');
+      setIsLoggedIn(!!meData.user);
     } catch (err) {
       setError('데이터를 불러오지 못했습니다.');
     } finally {
@@ -117,7 +124,7 @@ export default function ReviewsPage() {
           >
             {submitting ? '등록 중...' : '리뷰 등록'}
           </button>
-          <p className="text-xs text-stone-400">* 로그인 후 작성 가능합니다.</p>
+          {!isLoggedIn && <p className="text-xs text-stone-400">* 로그인 후 작성 가능합니다.</p>}
         </form>
       </ScrollReveal>
 
@@ -129,16 +136,7 @@ export default function ReviewsPage() {
         <ul className="space-y-4">
           {reviews.map((r) => (
             <ScrollReveal key={r.id}>
-              <li className="border border-stone-200 rounded-xl p-5 bg-white">
-                <div className="flex justify-between text-sm text-stone-500 mb-1">
-                  <span>{r.product_name}</span>
-                  <span>{'⭐'.repeat(r.rating)}</span>
-                </div>
-                <p className="text-stone-800">{r.content}</p>
-                <p className="text-xs text-stone-400 mt-2">
-                  {r.user_name} · {new Date(r.created_at).toLocaleDateString('ko-KR')}
-                </p>
-              </li>
+              <ReviewItem review={r} isAdmin={isAdmin} showProductName />
             </ScrollReveal>
           ))}
         </ul>
