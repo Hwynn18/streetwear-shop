@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 function getNewProducts() {
   try {
-    return listProducts({}).slice(0, 8);
+    return listProducts({}).slice(0, 4);
   } catch (err) {
     console.error('[HOME PRODUCTS ERROR]', err);
     return [];
@@ -68,7 +68,7 @@ export default function HomePage() {
         <ScrollReveal>
           <h2 className="text-2xl font-bold text-stone-900 mb-8">신상품</h2>
         </ScrollReveal>
-        <ProductGrid products={newProducts} />
+        <ProductGrid products={newProducts} fixedColumns />
       </section>
     </div>
   );

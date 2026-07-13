@@ -21,6 +21,7 @@ const emptyForm = {
 };
 
 export default function AdminProductsPage() {
+  const [uploading, setUploading] = useState(false);
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
@@ -49,9 +50,36 @@ export default function AdminProductsPage() {
     setEditingId(null);
   };
 
+  const handleFileChange = async (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  setUploading(true);
+  setError('');
+  try {
+    const fd = new FormData();
+    fd.append('file', file);
+    const res = await fetch('/api/upload', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (!res.ok) {
+      setError(data.error || '이미지 업로드에 실패했습니다.');
+      return;
+    }
+    setForm((f) => ({ ...f, image_url: data.url }));
+  } catch (err) {
+    setError('네트워크 오류가 발생했습니다.');
+  } finally {
+    setUploading(false);
+    e.target.value = '';
+  }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    if (!form.image_url) {
+      setError('상품 이미지를 업로드해주세요.');
+      return;
+    }
     try {
       const url = editingId ? `/api/products/${editingId}` : '/api/products';
       const method = editingId ? 'PUT' : 'POST';
@@ -147,13 +175,23 @@ export default function AdminProductsPage() {
           min={0}
           className="border border-stone-300 rounded-lg px-3 py-2"
         />
-        <input
-          placeholder="이미지 URL"
-          value={form.image_url}
-          onChange={(e) => setForm({ ...form, image_url: e.target.value })}
-          required
-          className="border border-stone-300 rounded-lg px-3 py-2 md:col-span-2"
-        />
+        <div className="md:col-span-2">
+          <label className="block text-sm text-stone-600 mb-1">상품 이미지</label>
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            onChange={handleFileChange}
+            className="text-sm"
+          />
+          {uploading && <p className="text-xs text-stone-400 mt-1">업로드 중...</p>}
+          {form.image_url && (
+            <img
+              src={form.image_url}
+              alt="미리보기"
+              className="w-24 h-24 object-cover rounded-lg mt-2 border border-stone-200"
+            />
+          )}
+        </div>
         <textarea
           placeholder="상품 설명"
           value={form.description}
@@ -173,7 +211,11 @@ export default function AdminProductsPage() {
         {error && <p className="text-sm text-red-500 md:col-span-2">{error}</p>}
 
         <div className="md:col-span-2 flex gap-2">
-          <button type="submit" className="bg-stone-800 text-white px-6 py-2 rounded-lg hover:bg-stone-900">
+          <button
+            type="submit"
+            disabled={uploading}
+            className="bg-stone-800 text-white px-6 py-2 rounded-lg hover:bg-stone-900 disabled:opacity-50"
+          >
             {editingId ? '수정 완료' : '상품 등록'}
           </button>
           {editingId && (

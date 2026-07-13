@@ -2,3 +2,6 @@ node_modules/
 .next/
 .env
 lib/data/db.json
+public/uploads/*
+!public/uploads/.gitkeeppublic/uploads/*
+!public/uploads/.gitkeep
